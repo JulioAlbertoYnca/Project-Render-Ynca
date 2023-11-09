@@ -26,6 +26,7 @@ import pe.edu.cibertec.entity.Usuario;
 import pe.edu.cibertec.servicesImpl.EmpleadoServices;
 import pe.edu.cibertec.servicesImpl.JefeServices;
 import pe.edu.cibertec.servicesImpl.RolServices;
+import pe.edu.cibertec.servicesImpl.TipoEmpleadoServices;
 import pe.edu.cibertec.servicesImpl.UsuarioServices;
 
 //@CrossOrigin(origins = "*")
@@ -41,12 +42,15 @@ public class UsuarioController {
 	private JefeServices serJef;
 	@Autowired 
 	private EmpleadoServices serEm;
+	@Autowired
+	private TipoEmpleadoServices serTipo;
 	
 	
 	@RequestMapping("/lista")
 	public String lista(Model model) {
 		model.addAttribute("usuarios", serUsu.listarTodos());
 		model.addAttribute("roles", serRol.listarTodos());
+		model.addAttribute("tipos", serTipo.listarTodos());
 		return "usuarioCRUD";
 	}
 	

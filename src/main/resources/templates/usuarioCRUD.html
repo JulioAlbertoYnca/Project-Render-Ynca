@@ -77,13 +77,42 @@
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>ROLES</b></label><br>
 										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-										<select class="form-control" id="idRol" name="rol">
+										<select class="form-control" id="idRol" name="rol" onchange="mostrarCamposAdicionales()">
 											<option value=" ">[Seleccione un Rol]</option>
 											<option th:each="fila:${roles}" th:utext="${fila.descripcion}"
 												th:value="${fila.idRol}" />
 										</select>
 
-									</div>	
+									</div>										
+								</div>				
+								<div id="camposInvicibles" style="display:none;">
+									    <div class="form-group has-feedback col-md-12">
+									        <label for="exampleInputEmail1"><b>DNI</b></label><br>
+									        <i class="fas fa-file-signature form-control-feedback2"></i>
+									        <input type="text" class="form-control" id="idDni" placeholder="Ingrese un DNI" name="dni">
+									    </div>
+									
+									    <div class="form-group has-feedback col-md-12">
+									        <label for="exampleInputEmail1"><b>TELEFONO</b></label><br>
+									        <i class="fas fa-file-signature form-control-feedback2"></i>
+									        <input type="text" class="form-control" id="idTelefono" placeholder="Ingrese su número de telefono" name="telefono">
+									    </div>
+									    <div class="form-group has-feedback col-md-10">
+										    <label for="exampleInputEmail1"><b>FECHA DE NACIMIENTO</b></label><br>
+										    <i class="fas fa-calendar-alt form-control-feedback2"></i>
+										    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+										</div>
+								</div>
+								<div id="camposInvicibles2" style="display:none;">
+										<div class="form-group has-feedback col-md-6">
+											<label for="exampleInputEmail1"><b>TIPO EMPLEADO</b></label><br>
+											<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+											<select class="form-control" id="idTipo" name="tipo">
+												<option value=" ">[Seleccione el tipo de Empleado]</option>
+												<option th:each="fila:${tipos}" th:utext="${fila.descripcion}"
+													th:value="${fila.idTipo}" />
+											</select>
+										</div>							
 								</div>
 								<div class="col-md-12 text-center mt-4">
 								<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
@@ -100,4 +129,16 @@
 	</div>
 	<div th:insert="plantilla/UITemplate :: pie"></div>
 </body>
+
+	<script>
+    function mostrarCamposAdicionales() {
+        var rolSeleccionado = document.getElementById("idRol").value;
+        var camposAdicionalesDiv = document.getElementById("camposInvicibles");
+        camposAdicionalesDiv.style.display = (rolSeleccionado === "2" || rolSeleccionado === "3") ? "block" : "none";
+        var campoAdicionalRol3 = document.getElementById("camposInvicibles2");
+        campoAdicionalRol3.style.display = (rolSeleccionado === "3") ? "block" : "none";
+    }
+	</script>
+
+
 </html>
