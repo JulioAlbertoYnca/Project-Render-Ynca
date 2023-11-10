@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -63,36 +64,46 @@ public class UsuarioController {
 			@RequestParam("password") String pas,
 			@RequestParam("nombre") String nom,
 			@RequestParam("apellido") String ape,
-			@RequestParam("rol") Integer rol,
+			@RequestParam(value="rol", required = true) Integer rol,
+			@RequestParam(value="dni", required = false) String dni,
+			@RequestParam(value="telefono", required = false) String tele,
+			@RequestParam(value="fechaNacimiento",required = false) String fecha,
+			@RequestParam(value="tipo",required = false) Integer tip,
 			RedirectAttributes redirect) {
+			
+			String infoPassword= pas;
+			BCryptPasswordEncoder passwordEncoder= new  BCryptPasswordEncoder();
+			String PasEncryp = passwordEncoder.encode(infoPassword);
+		
+		
 		try {
 			Usuario u = new Usuario();
 			u.setUserName(user);
-			u.setPassword(pas);
+			u.setPassword(PasEncryp);
 			u.setNombre(nom);
 			u.setApellido(ape);
 			Rol r = new Rol();
 			if (rol==2) {
 				Jefe j = new Jefe();
 				j.setUserName(user);
-				j.setPassword(pas);
+				j.setPassword(PasEncryp);
 				j.setNombre(nom);
 				j.setApellido(ape);
-				j.setDni("72280526");
-				j.setTelefono("965247510");
-				j.setFechaNacimiento(LocalDate.parse("2002-02-04"));
+				j.setDni(dni);
+				j.setTelefono(tele);
+				j.setFechaNacimiento(LocalDate.parse(fecha));
 				serJef.registrar(j);
 			} else if (rol==3) {
 				Empleado ep = new Empleado();
 				ep.setUserName(user);
-				ep.setPassword(pas);
+				ep.setPassword(PasEncryp);
 				ep.setNombre(nom);
 				ep.setApellido(ape);
-				ep.setDni("72280526");
-				ep.setTelefono("965247510");
-				ep.setFechaNacimiento(LocalDate.parse("2002-02-04"));
+				ep.setDni(dni);
+				ep.setTelefono(tele);
+				ep.setFechaNacimiento(LocalDate.parse(fecha));
 				TipoEmpleado t = new TipoEmpleado();
-				t.setIdTipo(1);
+				t.setIdTipo(tip);
 				ep.setTbTipoE(t);
 				serEm.registrar(ep);
 			}

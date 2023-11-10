@@ -77,17 +77,15 @@
 										</select>
 										<!-- Esto es provisional esto tambien se puede hacer en el controller -->
 									</div>	
-									<div class="form-group has-feedback col-md-4">
-										<label for="exampleInputEmail1" class="text-center"><b>FECHA INICIO</b></label><br>
-										<i class="fas fa-calendar-week form-control-feedback2"></i>
-										<input type="text" style="background-color:#aed6f1" class="form-control"
-											id="usr1" placeholder="YYYY-MM-DD" autocomplete="off" name="inicio">
+									<div class="form-group has-feedback col-md-10">
+										    <label for="exampleInputEmail1"><b>FECHA DE INICIO</b></label><br>
+										    <i class="fas fa-calendar-alt form-control-feedback2"></i>
+										    <input type="date" class="form-control" id="idFechaInicio" name="fechaInicio">
 									</div>
-									<div class="form-group has-feedback col-md-4">
-										<label for="exampleInputEmail1" class="text-center"><b>FECHA FIN</b></label><br>
-										<i class="fas fa-calendar-week form-control-feedback2"></i>
-										<input type="text" style="background-color:#aed6f1" class="form-control"
-											id="usr2" placeholder="YYYY-MM-DD" autocomplete="off" name="fin">
+									<div class="form-group has-feedback col-md-10">
+										    <label for="exampleInputEmail1"><b>FECHA DE FIN</b></label><br>
+										    <i class="fas fa-calendar-alt form-control-feedback2"></i>
+										    <input type="date" class="form-control" id="idFechaFin" name="fechaFin">
 									</div>
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Estado</b></label><br>
@@ -115,4 +113,4 @@
 	</div>
 	<div th:insert="plantilla/UITemplate :: pie"></div>
 </body>
-</html>l>
+</html>
