@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import pe.edu.cibertec.entity.Enlace;
@@ -28,5 +30,12 @@ public class UsuarioServices extends ICRUDImpl<Usuario, Integer>{
 	public List<Enlace> enlacesDelUsuario(int rol){
 		return repo.travelEnlaceUsuario(rol);
 	}
+	
+	public Usuario obtenerUsuario() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		return repo.buscarPorUserName(username);
+	}
+	
 	
 }

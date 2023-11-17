@@ -49,9 +49,14 @@ public class UsuarioController {
 	
 	@RequestMapping("/lista")
 	public String lista(Model model) {
+		
+		Usuario buscarUsuario = serUsu.obtenerUsuario();
+		
 		model.addAttribute("usuarios", serUsu.listarTodos());
 		model.addAttribute("roles", serRol.listarTodos());
 		model.addAttribute("tipos", serTipo.listarTodos());
+		
+		model.addAttribute("usuarioACtual", buscarUsuario);
 		return "usuarioCRUD";
 	}
 	
@@ -78,13 +83,18 @@ public class UsuarioController {
 		
 		try {
 			Usuario u = new Usuario();
-			u.setUserName(user);
-			u.setPassword(PasEncryp);
-			u.setNombre(nom);
-			u.setApellido(ape);
-			Rol r = new Rol();
+				u.setUserName(user);
+				u.setPassword(PasEncryp);
+				u.setNombre(nom);
+				u.setApellido(ape);
+				Rol r = new Rol();
+					r.setIdRol(rol);
+					u.setTbRol(r);
+			serUsu.registrar(u);
+			Integer codResgistro = u.getCodigoUsuario();
 			if (rol==2) {
 				Jefe j = new Jefe();
+				j.setCodigoJefe(codResgistro);
 				j.setUserName(user);
 				j.setPassword(PasEncryp);
 				j.setNombre(nom);
@@ -95,6 +105,7 @@ public class UsuarioController {
 				serJef.registrar(j);
 			} else if (rol==3) {
 				Empleado ep = new Empleado();
+				ep.setCodigoEmpleado(codResgistro);
 				ep.setUserName(user);
 				ep.setPassword(PasEncryp);
 				ep.setNombre(nom);
@@ -107,10 +118,8 @@ public class UsuarioController {
 				ep.setTbTipoE(t);
 				serEm.registrar(ep);
 			}
-			r.setIdRol(rol);
-			u.setTbRol(r);
+			
 			if (cod==0) {
-				serUsu.registrar(u);
 				redirect.addFlashAttribute("Mensaje", "Nuevo Usuario registrado");
 			}else {
 				u.setCodigoUsuario(cod);

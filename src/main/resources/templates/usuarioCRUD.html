@@ -7,7 +7,11 @@
 <body>
 	<div th:insert="plantilla/UITemplate :: menu"></div>
 	<div class="container">
+		
 		<h3 class="text-center mt-4">LISTA DE USUARIOS</h3>
+		<p>Usuario Logeado Codigo: <span th:text="${usuarioACtual.codigoUsuario}"></span></p>
+		<p>Usuario Logeado UserName: <span th:text="${usuarioACtual.userName}"></span></p>
+		
 		<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalUsuario" id="btn-nuevo"> 
 			<i class="far fa-file"></i> Nuevo Usuario
 		</button>

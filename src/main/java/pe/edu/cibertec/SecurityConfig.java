@@ -21,11 +21,12 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable().authorizeHttpRequests().requestMatchers("/validar/**","/resources/**").permitAll().
-		and().authorizeHttpRequests().requestMatchers("/usuario/**","/actividad/**").authenticated().
+		http.csrf().disable().authorizeHttpRequests().requestMatchers("/validar/**","/resources/templates/**").permitAll().
+		and().authorizeHttpRequests().requestMatchers("/usuario/**","/actividad/**","/empleado/**").authenticated().
 		and().formLogin().loginPage("/validar/usuario").
 		defaultSuccessUrl("/validar/intranet");
 		return http.build();
+		
 	}
 	@Bean
 	public UserDetailsService userDetailsService() {

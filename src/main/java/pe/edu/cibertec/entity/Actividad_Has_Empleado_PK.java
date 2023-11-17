@@ -10,10 +10,10 @@ import lombok.Data;
 @Embeddable
 public class Actividad_Has_Empleado_PK implements Serializable{
 	
-	@Column(name="id_actvidad")
-	private Integer idActividad;
+	@Column(name="id_actividad")
+	private int idActividad;
 	
 	@Column(name="id_empleado")
-	private Integer codigoEmpleado;
+	private int codigoEmpleado;
 
 }
